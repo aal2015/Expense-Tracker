@@ -106,7 +106,7 @@ function TransactionDetail() {
                     </Grid2>
 
                     {/* Row 8 */}
-                    {transactionDetail.items &&
+                    {transactionDetail.items.length > 0 &&
                         <>
                             <Grid2 xs={attribute_width_size}>
                                 <p>Items:</p>
@@ -123,7 +123,7 @@ function TransactionDetail() {
                                         {transactionDetail.items.map((item, id) => (
                                             <tr key={id} className={styles.itemWidth}>
                                                 <td>{item["item"]}</td>
-                                                <td>{item["qty"]}</td>
+                                                <td>{item["itemQty"]}</td>
                                             </tr>
                                         ))}
                                     </tbody>

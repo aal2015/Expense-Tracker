@@ -7,16 +7,18 @@ import ReceiptLongIcon from '@mui/icons-material/ReceiptLong';
 import FlightIcon from '@mui/icons-material/Flight';
 import AccountBalanceIcon from '@mui/icons-material/AccountBalance';
 import PostAddIcon from '@mui/icons-material/PostAdd';
+import EventIcon from '@mui/icons-material/Event';
 
 export const typeIcons = {
     "Food/Drink": <FastfoodIcon />, "Grocery": <LocalGroceryStoreIcon />,
     "Bill": <ReceiptLongIcon />, "Travel": <FlightIcon />,
-    "Institution": <AccountBalanceIcon />, "Other": <PostAddIcon />
+    "Institution": <AccountBalanceIcon />, "Other": <PostAddIcon />,
+    "Event": <EventIcon />
 };
 
 export const typeColor = {
     "Food/Drink": "red", "Grocery": "orange", "Institution": "brown", "Bill": "green", 
-    "Travel": "#0073cf", "Other": "Gray"
+    "Travel": "#0073cf", "Other": "Gray", "Event": "#0081C9"
 }
 
 export const months = ["January", "February", "March", "April", "May", "June", "July", "August",

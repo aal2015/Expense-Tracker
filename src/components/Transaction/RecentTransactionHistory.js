@@ -9,7 +9,10 @@ import { collection, query, orderBy, limit, getDocs } from "firebase/firestore";
 function RecentTransactionHistory() {
     const [transactionHist, setTransactionHist] = useState([]);
     const transactionRef = collection(db, 'transactions');
-    const q = query(transactionRef, orderBy("transactionDate"), limit(15));
+    // const thirtyDaysAgo = new Date() - 1000 * 60 * 60 * 24 * 10000;
+    // const thirtyDaysAgoDate = new Date(thirtyDaysAgo);
+    // const q = query(transactionRef, orderBy("transactionDate"), where("transactionDate", ">=", thirtyDaysAgoDate));
+    const q = query(transactionRef, orderBy("transactionDate", "desc"), limit(50));
     
     useEffect(() => {
         getDocs(q).then((querySnapshot) => {
@@ -21,7 +24,6 @@ function RecentTransactionHistory() {
                     description: doc.data().description, entity: doc.data().entity, items: doc.data().items,
                     transactionDate: doc.data().transactionDate.toDate(), type: doc.data().type
                 }
-                console.log(dataObject);
                 loadedDataList.push({docRef: doc.id, data: dataObject});
             });
             console.log(loadedDataList);
@@ -33,7 +35,7 @@ function RecentTransactionHistory() {
     
     return (
         <ContentBox>
-            <h3>Recent Transactions (upto last 15 Transactions)</h3>
+            <h3>Recent Transactions (upto last 50 Transactions)</h3>
 
             {transactionHist &&
                 transactionHist.map((item, id) => (
