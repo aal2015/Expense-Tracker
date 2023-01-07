@@ -1,0 +1,21 @@
+#flex-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+#flex-container h4 {
+    display: inline;
+    margin-right: 10px;
+}
+
+#flex-container button {
+    border: none;
+    background-color: white;
+    text-decoration: none;
+    height: 100%;
+    font-size: 16px;
+}
+
+#flex-container button:hover {
+    cursor: pointer;
+}

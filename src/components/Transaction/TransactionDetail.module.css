@@ -1,0 +1,26 @@
+#background {
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+#background h1 {
+    text-align: center;
+}
+
+#background p {
+    margin: 0;
+}
+
+#maxRowWidth {
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+#background table {
+    width: 100%;
+    text-align: left;
+}
+
+.itemWidth {
+    width: 80%;
+}

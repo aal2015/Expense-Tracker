@@ -1,0 +1,32 @@
+.button-list {
+    width: 100%;
+    text-decoration: none;
+    border: none;
+    background-color: white;
+    text-align: left; 
+    transition: 0.3s;
+    padding: 15px 5px; 
+}
+
+.button-list:hover {
+    cursor: pointer;
+    background-color: #E8E8E8;
+}
+
+.button-list h2 {
+    margin: 0;
+}
+    
+.amount-format {
+    text-align: right;
+    font-size: 16px;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: 90px auto auto;
+}
+
+.linkStyle {
+    text-decoration: none;
+}

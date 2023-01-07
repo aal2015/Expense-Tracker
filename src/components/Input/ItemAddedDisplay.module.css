@@ -1,0 +1,16 @@
+.displayCell {
+    margin: 0;
+    padding: 5px 0;
+}
+
+.itemDisplay {
+    background-color: #EEEEEE;
+    border-radius: 15px;
+    margin: 10px 0;
+    padding: 5px 0;
+}
+
+#noItemAdded {
+    color: gray;
+    font-style: italic;
+}

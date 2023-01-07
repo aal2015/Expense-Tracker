@@ -1,0 +1,94 @@
+.buttonStyling {
+    text-decoration: none;
+    border: none;
+    transition: 0.3s;
+    padding: 8px;
+}
+
+.buttonStyling:hover {
+    cursor: pointer;
+}
+
+.buttonStyling:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.backButton {
+    background-color: #add8e6;
+    text-align: left;
+    font-size: 16px;
+}
+
+.backButton:hover {
+    background-color: #5bbbdb;
+}
+
+.addTrancactionRecordButton {
+    background-color: #E1D7C6;
+    border: 2px solid black;
+    border-radius: 20px;
+}
+
+.addTrancactionRecordButton:hover {
+    background-color: #e0b161;
+}
+
+.addTransaction-submit-button {
+    font-size: 18px;
+    color: white;
+    background-color: #144272;
+    width: 110px;
+    border: 2px solid black;
+    border-radius: 20px;
+}
+
+.addTransaction-submit-button:hover {
+    background-color: #0A2647;
+}
+
+.addTransaction-clear-button {
+    font-size: 18px;
+    background-color: #FFEBB7;
+    width: 110px;
+    border: 2px solid black;
+    border-radius: 20px;
+}
+
+.addTransaction-clear-button:hover {
+    background-color: #f9d782;
+}
+
+.addTransaction-cancel-button {
+    font-size: 18px;
+    background-color: #C58940;
+    color: white;
+    width: 110px;
+    border: 2px solid black;
+    border-radius: 20px;
+}
+
+.addTransaction-cancel-button:hover {
+    background-color: #ce770c;
+}
+
+.addTransaction-addItem-button {
+    background-color: #E1D7C6;
+    font-size: 16px;
+    border-radius: 20px;
+    border: 2px solid black;
+}
+
+.addTransaction-addItem-button:hover {
+    background-color: #dbbb84;
+}
+
+.addTransaction-removeItem-button {
+    background-color: #BAD7E9;
+    border-radius: 5px;
+    /* border: 1px solid black; */
+}
+
+.addTransaction-removeItem-button:hover {
+    background-color: #6db8e6;
+}
