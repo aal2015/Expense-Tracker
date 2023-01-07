@@ -16,7 +16,7 @@ function TransactionDetail() {
     const cashFlowIcon = { "out": <ArrowDropDownIcon />, "in": <ArrowDropUpIcon /> }
     const cashFlowColor = { "out": "red", "in": "green" }
 
-    const date = transactionDetail.transactionDate.toDate();
+    const date = transactionDetail.transactionDate;
     
     const year = date.getFullYear();
     const month = months[date.getMonth()];

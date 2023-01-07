@@ -13,13 +13,19 @@ function RecentTransactionHistory() {
     
     useEffect(() => {
         getDocs(q).then((querySnapshot) => {
-            const loadedData = [];
+            const loadedDataList = [];
             querySnapshot.forEach((doc) => {
                 console.log(`${doc.id} => ${doc.data()}`);
-                loadedData.push({docRef: doc.id, data: doc.data()});
+                let dataObject = {
+                    amount: doc.data().amount, cashFlow: doc.data().cashFlow, currency: doc.data().currency,
+                    description: doc.data().description, entity: doc.data().entity, items: doc.data().items,
+                    transactionDate: doc.data().transactionDate.toDate(), type: doc.data().type
+                }
+                console.log(dataObject);
+                loadedDataList.push({docRef: doc.id, data: dataObject});
             });
-            console.log(loadedData);
-            setTransactionHist(loadedData);
+            console.log(loadedDataList);
+            setTransactionHist(loadedDataList);
         }).catch(error => {
             console.log(error);
         });

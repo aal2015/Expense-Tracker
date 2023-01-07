@@ -23,7 +23,7 @@ export const months = ["January", "February", "March", "April", "May", "June", "
     "September", "October", "November", "December"];
 
 function TransactionDisplay(props) {
-    const date = props.details.transactionDate.toDate();
+    const date = props.details.transactionDate;
 
     const year = date.getFullYear();
     const month = months[date.getMonth()];
