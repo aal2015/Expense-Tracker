@@ -115,15 +115,17 @@ function TransactionDetail() {
                                 <table>
                                     <thead>
                                         <tr>
-                                            <th className={styles.itemWidth}>Item</th>
+                                            <th>Item</th>
                                             <th>Qty</th>
+                                            <th>Price</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         {transactionDetail.items.map((item, id) => (
-                                            <tr key={id} className={styles.itemWidth}>
+                                            <tr key={id}>
                                                 <td>{item["item"]}</td>
                                                 <td>{item["itemQty"]}</td>
+                                                <td>{item["itemPrice"]}</td>
                                             </tr>
                                         ))}
                                     </tbody>

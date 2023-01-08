@@ -7,11 +7,14 @@ import Grid from '@mui/material/Grid';
 function ItemAddedDisplay(props) {
     const header = (
         <Grid container spacing={1}>
-            <Grid item xs={7}>
+            <Grid item xs={5}>
                 <h5>Item</h5>
             </Grid>
-            <Grid item xs={3}>
+            <Grid item xs={2}>
                 <h5>Qty</h5>
+            </Grid>
+            <Grid item xs={3}>
+                <h5>Price</h5>
             </Grid>
             <Grid item xs={2}>
                 <h5>Delete</h5>
@@ -25,11 +28,14 @@ function ItemAddedDisplay(props) {
                 <>
                     <div key={id} className={styles.itemDisplay}>
                         <Grid container spacing={1}>
-                            <Grid item xs={7}>
+                            <Grid item xs={5}>
                                 <p className={styles.displayCell}>{item.item}</p>
                             </Grid>
-                            <Grid item xs={3}>
+                            <Grid item xs={2}>
                                 <p className={styles.displayCell}>{item.itemQty}</p>
+                            </Grid>
+                            <Grid item xs={3}>
+                                <p className={styles.displayCell}>{item.itemPrice}</p>
                             </Grid>
                             <Grid item xs={2}>
                                 <Button

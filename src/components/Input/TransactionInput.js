@@ -59,9 +59,9 @@ function TransactionInput() {
         value: descriptionValue, valueChangeHandler: descriptionChangeHandler, reset: resetDescription,
     } = useInput(() => true);
     const {
-        item: itemNameValue, itemChangeHandler: itemNameChangeHandler, itemQty, isEmpty: itemIsEmpty,
-        itemQtyChangeHandler, inputBlurHandler, itemList, appendItem, hasError: itemHasError,
-        removeItem, reset: resetItem
+        item: itemNameValue, itemChangeHandler: itemNameChangeHandler, itemQty, itemPrice, 
+        itemPriceChangeHandler, itemQtyChangeHandler, isEmpty: itemIsEmpty, inputBlurHandler, itemList, 
+        appendItem, hasError: itemHasError, removeItem, reset: resetItem
     } = UseItemQty()
 
     const navigate = useNavigate();
@@ -179,6 +179,7 @@ function TransactionInput() {
                             <AddItem
                                 itemNameValue={itemNameValue} itemNameChangeHandler={itemNameChangeHandler}
                                 itemQty={itemQty} itemQtyChangeHandler={itemQtyChangeHandler} resetItemName={resetItem}
+                                itemPrice={itemPrice} itemPriceChangeHandler={itemPriceChangeHandler}
                                 variant={variant} appendItem={appendItem} inputBlurHandler={inputBlurHandler}
                                 hasError={itemHasError} itemIsEmpty={itemIsEmpty}
                             />

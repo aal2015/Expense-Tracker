@@ -8,7 +8,7 @@ function AddItem(props) {
         <>
             <h3>Add Items</h3>
             <Grid container spacing={3}>
-                <Grid item xs={9}>
+                <Grid item xs={6}>
                     <FormTextInput
                         label="Item" value={props.itemNameValue} variant={props.variant} inputType="text"
                         changeHandler={props.itemNameChangeHandler} blurHandler={props.inputBlurHandler}
@@ -20,6 +20,12 @@ function AddItem(props) {
                         label="Qty" value={props.itemQty} variant={props.variant} inputType="number"
                         changeHandler={props.itemQtyChangeHandler} blurHandler={props.inputBlurHandler}
                         hasError={props.hasError}
+                    />
+                </Grid>
+                <Grid item xs={3}>
+                    <FormTextInput
+                        label="Price" value={props.itemPrice} variant={props.variant} inputType="number"
+                        changeHandler={props.itemPriceChangeHandler} blurHandler={props.inputBlurHandler}
                     />
                 </Grid>
                 <Grid item xs={12}>
