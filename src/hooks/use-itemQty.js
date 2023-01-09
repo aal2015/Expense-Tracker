@@ -6,6 +6,7 @@ function UseItemQty() {
     const [item, setItem] = useState('')
     const [itemQty, setItemQty] = useState('');
     const [itemPrice, setItemPrice] = useState('');
+    const [totalCost, setTotalCost] = useState(0);
     const [itemList, setItemList] = useState([]);
     const [isTouched, setIsTouched] = useState(false);
 
@@ -14,7 +15,7 @@ function UseItemQty() {
 
     if (item.trim().length > 0 || itemQty.trim().length > 0 || itemPrice.trim().length > 0) {
         if ((item.trim().length === 0 || itemQty.trim().length === 0) ||
-        (item.trim().length === 0 && itemQty.trim().length === 0 && itemPrice.trim().length != 0)) {
+        (item.trim().length === 0 && itemQty.trim().length === 0 && itemPrice.trim().length !== 0)) {
             hasError = true && isTouched;
         }
     }
@@ -40,10 +41,17 @@ function UseItemQty() {
         setItem('');
         setItemQty('');
         setItemPrice('');
+
+        setTotalCost(prevTotalcost => prevTotalcost + Number(itemPrice) * Number(itemQty));
     };
 
     const removeItem = deleteId => {
         console.log('Click', deleteId);
+        itemList.forEach(item => {
+            if (item.id === deleteId) {
+                setTotalCost(prevTotalcost => prevTotalcost - Number(item.itemPrice) * Number(item.itemQty));
+            }
+        })
         setItemList(value => value.filter(v => v.id !== deleteId))
     }
 
@@ -62,6 +70,7 @@ function UseItemQty() {
         itemQtyChangeHandler,
         itemPrice,
         itemPriceChangeHandler,
+        totalCost,
         inputBlurHandler,
         itemList,
         appendItem,

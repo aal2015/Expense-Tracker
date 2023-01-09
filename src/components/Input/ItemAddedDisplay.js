@@ -58,6 +58,7 @@ function ItemAddedDisplay(props) {
         {props.itemList.length === 0 &&
             <p id={styles.noItemAdded}>Items not yet added</p>
         }
+        <p id={styles.totalCostStyling}><b>Total Cost:</b> {props.itemTotalCost}</p>
     </>)
 };
 

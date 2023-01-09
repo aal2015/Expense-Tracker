@@ -11,7 +11,6 @@ import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace';
 
 function TransactionDetail() {
     const { state } = useLocation();
-    console.log(state.transactionDate);
     const transactionDetail = state;
     const cashFlowIcon = { "out": <ArrowDropDownIcon />, "in": <ArrowDropUpIcon /> }
     const cashFlowColor = { "out": "red", "in": "green" }
@@ -21,6 +20,12 @@ function TransactionDetail() {
     const year = date.getFullYear();
     const month = months[date.getMonth()];
     const day = date.getDate();
+
+    let totalCost = 0;
+
+    for (let i = 0; i < transactionDetail.items.length; i++) {
+        totalCost += Number(transactionDetail.items[i].itemPrice) * Number(transactionDetail.items[i].itemQty);
+    }
 
     const attribute_width_size = 4;
     const value_width_size = 8;
@@ -130,7 +135,7 @@ function TransactionDetail() {
                                         ))}
                                     </tbody>
                                 </table>
-
+                                <p id={styles.totalCostStyling}><b>Total Cost:</b> { totalCost }</p>
                             </Grid2>
                         </>
                     }

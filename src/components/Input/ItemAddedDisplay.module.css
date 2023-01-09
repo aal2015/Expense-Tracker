@@ -14,3 +14,10 @@
     color: gray;
     font-style: italic;
 }
+
+#totalCostStyling {
+    background-color: #F7F5EB;
+    font-size: large;
+    padding: 5px 0;
+    border-radius: 10px;
+}

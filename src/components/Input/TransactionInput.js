@@ -60,8 +60,8 @@ function TransactionInput() {
     } = useInput(() => true);
     const {
         item: itemNameValue, itemChangeHandler: itemNameChangeHandler, itemQty, itemPrice, 
-        itemPriceChangeHandler, itemQtyChangeHandler, isEmpty: itemIsEmpty, inputBlurHandler, itemList, 
-        appendItem, hasError: itemHasError, removeItem, reset: resetItem
+        itemPriceChangeHandler, itemQtyChangeHandler, totalCost: itemTotalCost, isEmpty: itemIsEmpty, 
+        inputBlurHandler, itemList, appendItem, hasError: itemHasError, removeItem, reset: resetItem
     } = UseItemQty()
 
     const navigate = useNavigate();
@@ -181,11 +181,11 @@ function TransactionInput() {
                                 itemQty={itemQty} itemQtyChangeHandler={itemQtyChangeHandler} resetItemName={resetItem}
                                 itemPrice={itemPrice} itemPriceChangeHandler={itemPriceChangeHandler}
                                 variant={variant} appendItem={appendItem} inputBlurHandler={inputBlurHandler}
-                                hasError={itemHasError} itemIsEmpty={itemIsEmpty}
+                                hasError={itemHasError} itemIsEmpty={itemIsEmpty} 
                             />
                         </Grid>
                         <Grid item xs={6}>
-                            <ItemAddedDisplay itemList={itemList} removeItem={removeItem} />
+                            <ItemAddedDisplay itemList={itemList} removeItem={removeItem} itemTotalCost={itemTotalCost} />
                         </Grid>
 
                         {/* Row 4 */}
