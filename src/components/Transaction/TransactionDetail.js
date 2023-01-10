@@ -16,7 +16,7 @@ function TransactionDetail() {
     const cashFlowColor = { "out": "red", "in": "green" }
 
     const date = transactionDetail.transactionDate;
-    
+
     const year = date.getFullYear();
     const month = months[date.getMonth()];
     const day = date.getDate();
@@ -135,10 +135,23 @@ function TransactionDetail() {
                                         ))}
                                     </tbody>
                                 </table>
-                                <p id={styles.totalCostStyling}><b>Total Cost:</b> { totalCost }</p>
+                                <p id={styles.totalCostStyling}><b>Total Cost:</b> {totalCost}</p>
                             </Grid2>
                         </>
                     }
+                    <Grid2 xs={12} id={styles.editDeleteButton}>
+                        <Button
+                            type="submit"
+                            buttonStyle="transactionDetail-edit"
+                        >
+                            Edit
+                        </Button> | <Button
+                            type="submit"
+                            buttonStyle="transactionDetail-delete"
+                        >
+                            Delete
+                        </Button>
+                    </Grid2>
                 </Grid2>
             </ContentBox>
         </div>
