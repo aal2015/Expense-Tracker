@@ -141,12 +141,12 @@ function TransactionDetail() {
                     }
                     <Grid2 xs={12} id={styles.editDeleteButton}>
                         <Button
-                            type="submit"
+                            type="button"
                             buttonStyle="transactionDetail-edit"
                         >
                             Edit
                         </Button> | <Button
-                            type="submit"
+                            type="button"
                             buttonStyle="transactionDetail-delete"
                         >
                             Delete

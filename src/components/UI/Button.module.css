@@ -85,11 +85,36 @@
 
 .addTransaction-removeItem-button {
     background-color: #BAD7E9;
-    border-radius: 5px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
 }
 
 .addTransaction-removeItem-button:hover {
     background-color: #6db8e6;
+}
+
+.edit-item-added-before-save-button {
+    background-color: #2C74B3;
+    color: white;
+    width: 100px;
+    font-size: 16px;
+    border-radius: 20px;
+    border: 2px solid black;
+}
+
+.edit-item-added-before-save-button:hover {
+    background-color: #0d66b4;
+}
+
+.edit-item-button {
+    background-color: #2C74B3;
+    color: white;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
+
+.edit-item-button:hover {
+    background-color: #0061b6;
 }
 
 .transactionDetail-edit {

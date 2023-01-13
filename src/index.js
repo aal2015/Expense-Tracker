@@ -10,6 +10,7 @@ import reportWebVitals from './reportWebVitals';
 import Homepage from './Homepage';
 import TransactionDetail from './components/Transaction/TransactionDetail';
 import TransactionInput from './components/Input/TransactionInput';
+import EditTransaction from './components/Edit/EditTransaction';
 
 const router = createBrowserRouter([
   {
@@ -27,6 +28,11 @@ const router = createBrowserRouter([
       {
         path: "addTransactionRecord",
         element: <TransactionInput />
+      }
+      ,
+      {
+        path: "editTransaction/:id",
+        element: <EditTransaction />
       }
     ]
   },

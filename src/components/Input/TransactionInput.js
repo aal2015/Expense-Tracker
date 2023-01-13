@@ -1,3 +1,4 @@
+import { useState } from "react";
 import AddItem from "./AddItem";
 import ItemAddedDisplay from "./ItemAddedDisplay";
 import ContentBox from "../UI/ContentBox";
@@ -6,6 +7,7 @@ import FormTextInput from "../UI/FormTextInput";
 import FormSelect from "../UI/FormSelect";
 import FormDatePicker from "../UI/FormDatePicker";
 import FormMultiLineTextInput from "../UI/FormMultiLineTextInput";
+import ItemDialog from "../Edit/ItemDialog";
 import useInput from "../../hooks/use-input";
 import UseItemQty from "../../hooks/use-itemQty";
 import UseDatePicker from "../../hooks/use-datePicker";
@@ -24,6 +26,9 @@ const isNotEmpty = value => value.trim() !== "";
 const properDateFormat = value => dayjs(value, 'DD/MM/YYYY').isValid();
 
 function TransactionInput() {
+    const [open, setOpen] = useState(false);
+    const [itemIndexEdit, setItemIndexEdit] = useState(null);
+
     const variant = "outlined";
 
     const {
@@ -59,9 +64,10 @@ function TransactionInput() {
         value: descriptionValue, valueChangeHandler: descriptionChangeHandler, reset: resetDescription,
     } = useInput(() => true);
     const {
-        item: itemNameValue, itemChangeHandler: itemNameChangeHandler, itemQty, itemPrice, 
-        itemPriceChangeHandler, itemQtyChangeHandler, totalCost: itemTotalCost, isEmpty: itemIsEmpty, 
-        inputBlurHandler, itemList, appendItem, hasError: itemHasError, removeItem, reset: resetItem
+        item: itemNameValue, itemChangeHandler: itemNameChangeHandler, itemQty, itemPrice,
+        itemPriceChangeHandler, itemQtyChangeHandler, totalCost: itemTotalCost, isEmpty: itemIsEmpty,
+        inputBlurHandler, itemList, appendItem, hasError: itemHasError, removeItem, reset: resetItem,
+        updateItem
     } = UseItemQty()
 
     const navigate = useNavigate();
@@ -69,7 +75,14 @@ function TransactionInput() {
     const cashFlowList = ["in", "out"];
     const currencyCodeList = ["THB", "INR", "USD", "EUR"]
 
+    const handleClickOpen = id => {
+        setItemIndexEdit(id)
+        setOpen(true);
+    };
 
+    const handleClose = () => {
+        setOpen(false);
+    };
 
     let formIsValid = false;
     if (entityIsValid && typeIsValid && cashFlowIsValid && amountIsValid && currencyIsValid && transactionIsValid) {
@@ -181,11 +194,16 @@ function TransactionInput() {
                                 itemQty={itemQty} itemQtyChangeHandler={itemQtyChangeHandler} resetItemName={resetItem}
                                 itemPrice={itemPrice} itemPriceChangeHandler={itemPriceChangeHandler}
                                 variant={variant} appendItem={appendItem} inputBlurHandler={inputBlurHandler}
-                                hasError={itemHasError} itemIsEmpty={itemIsEmpty} 
+                                hasError={itemHasError} itemIsEmpty={itemIsEmpty}
                             />
                         </Grid>
                         <Grid item xs={6}>
-                            <ItemAddedDisplay itemList={itemList} removeItem={removeItem} itemTotalCost={itemTotalCost} />
+                            <ItemAddedDisplay
+                                itemList={itemList}
+                                removeItem={removeItem}
+                                itemTotalCost={itemTotalCost}
+                                handleClickOpen={handleClickOpen}
+                            />
                         </Grid>
 
                         {/* Row 4 */}
@@ -206,6 +224,12 @@ function TransactionInput() {
                     </Grid>
                 </form>
             </ContentBox>
+
+            <ItemDialog
+                open={open} setOpen={setOpen} handleClose={handleClose} 
+                item={itemList[itemIndexEdit]} itemIndexEdit={itemIndexEdit} 
+                updateItem={updateItem}
+            />
         </div>
     )
 }

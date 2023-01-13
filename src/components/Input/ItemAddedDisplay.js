@@ -1,6 +1,7 @@
 import React from 'react';
 import styles from './ItemAddedDisplay.module.css';
 import Button from '../UI/Button';
+import ButtonGroup from '../UI/ButtonGroup';
 
 import Grid from '@mui/material/Grid';
 
@@ -17,7 +18,7 @@ function ItemAddedDisplay(props) {
                 <h5>Price</h5>
             </Grid>
             <Grid item xs={2}>
-                <h5>Delete</h5>
+                <h5>Edit/Delete</h5>
             </Grid>
         </Grid>
     );
@@ -38,11 +39,22 @@ function ItemAddedDisplay(props) {
                                 <p className={styles.displayCell}>{item.itemPrice}</p>
                             </Grid>
                             <Grid item xs={2}>
-                                <Button
-                                    type="button"
-                                    buttonStyle="addTransaction-removeItem-button"
-                                    clickHandler={() => props.removeItem(item.id)}
-                                >X</Button>
+                                <ButtonGroup 
+                                    variant="text" 
+                                    aria-label="outlined primary button group"
+                                    id={styles.groupButton}    
+                                >
+                                    <Button
+                                        type="button"
+                                        buttonStyle="edit-item-button"
+                                        clickHandler={() => props.handleClickOpen(id)}
+                                    >Edit</Button>
+                                    <Button
+                                        type="button"
+                                        buttonStyle="addTransaction-removeItem-button"
+                                        clickHandler={() => props.removeItem(item.id)}
+                                    >X</Button>
+                                </ButtonGroup>
                             </Grid>
                         </Grid>
                     </div>

@@ -20,6 +20,12 @@ function UseItemQty() {
         }
     }
 
+    const initFields = (item, quantity, price) => {
+        setItem(item);
+        setItemQty(quantity);
+        setItemPrice(price);
+    }
+
     const itemChangeHandler = event => {
         setItem(event.target.value);
     };
@@ -55,6 +61,16 @@ function UseItemQty() {
         setItemList(value => value.filter(v => v.id !== deleteId))
     }
 
+    const updateItem = (listIndex, updatedItem) => {
+        const updatedList = itemList.map((itemObj, index) => {
+            if (listIndex === index) {
+                return updatedItem;
+            }
+            return itemObj;
+        });
+        setItemList(updatedList);
+    }
+
     const reset = () => {
         setItem('')
         setItemQty('');
@@ -76,7 +92,9 @@ function UseItemQty() {
         appendItem,
         hasError,
         removeItem,
-        reset
+        reset,
+        initFields,
+        updateItem
     };
 
 }
