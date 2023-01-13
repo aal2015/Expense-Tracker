@@ -62,6 +62,21 @@ function UseItemQty() {
     }
 
     const updateItem = (listIndex, updatedItem) => {
+        const newItemPrice = updatedItem.itemPrice * updatedItem.itemQty;
+        const prevItemPrice = itemList[listIndex].itemPrice * itemList[listIndex].itemQty;
+        const diff = Math.abs(newItemPrice - prevItemPrice);
+        let newTotalCost = -1;
+
+        if (newItemPrice > prevItemPrice) {
+            newTotalCost = totalCost + diff;
+        } else if (newItemPrice < prevItemPrice) {
+            newTotalCost = totalCost - diff;
+        }
+
+        if (newTotalCost !== -1) {
+            setTotalCost(newTotalCost);
+        }
+
         const updatedList = itemList.map((itemObj, index) => {
             if (listIndex === index) {
                 return updatedItem;
