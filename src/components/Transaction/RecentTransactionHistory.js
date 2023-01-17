@@ -23,7 +23,6 @@ function RecentTransactionHistory() {
         getDocs(q).then((querySnapshot) => {
             const loadedDataList = [];
             querySnapshot.forEach((doc) => {
-                console.log(`${doc.id} => ${doc.data()}`);
                 let dataObject = {
                     amount: doc.data().amount, cashFlow: doc.data().cashFlow, currency: doc.data().currency,
                     description: doc.data().description, entity: doc.data().entity, items: doc.data().items,

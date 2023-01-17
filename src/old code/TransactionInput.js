@@ -114,7 +114,7 @@ function TransactionInput() {
             description: descriptionValue.trim(),
             items: itemList
         }
-        console.log(submitData);
+        
         try {
             const docRef = await addDoc(collection(db, "transactions"), submitData);
             console.log("Document written with ID: ", docRef.id);

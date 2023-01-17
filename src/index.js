@@ -9,7 +9,7 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import Homepage from './Homepage';
 import TransactionDetail from './components/Transaction/TransactionDetail';
-import TransactionInput from './components/Input/TransactionInput';
+import AddTransaction from './components/Input/AddTransaction';
 import EditTransaction from './components/Edit/EditTransaction';
 
 const router = createBrowserRouter([
@@ -27,7 +27,7 @@ const router = createBrowserRouter([
       },
       {
         path: "addTransactionRecord",
-        element: <TransactionInput />
+        element: <AddTransaction />
       }
       ,
       {

@@ -7,6 +7,10 @@ const useInput = (validateValue) => {
     const valueIsValid = validateValue(enteredValue);
     const hasError = !valueIsValid && isTouched;
 
+    const initHandler = initValue => {
+        setEnteredValue(initValue);
+    }
+
     const valueChangeHandler = event => {
         setEnteredValue(event.target.value);
     }
@@ -21,6 +25,7 @@ const useInput = (validateValue) => {
     }
 
     return {
+        initHandler,
         value: enteredValue,
         isValid: valueIsValid,
         hasError, 

@@ -1,22 +1,26 @@
-import ContentBox from "../UI/ContentBox";
-import styles from './EditTransaction.module.css';
+import TransactionForm from "../Input/TransactionForm";
+
+import { db } from "../../firebase/firebaseConfig";
+import { useParams, useNavigate } from 'react-router-dom';
+import { doc, updateDoc } from "firebase/firestore";
 
 function EditTransaction() {
+    const navigate = useNavigate();
+    const { id: documentId } = useParams();
+    // const collectionRef = getDoc(doc(db, "transactions", documentId)).then(data => {console.log(data.data());})
 
-    const submitHandler = () => {
-        console.log("Submiteed");
+    const submitTransactionRecord = async (submitData) => {
+        try {
+            const documentRef = doc(db, "transactions", documentId);
+            await updateDoc(documentRef, submitData)
+            console.log("Document Updated");
+            navigate("..");
+        } catch (e) {
+            console.error(e);
+        }
     }
 
-    return (
-        <div id={styles["background"]}>
-            <ContentBox>
-                <h1>Edit Transaction Record</h1>
-                <form onSubmit={submitHandler}>
-                    
-                </form>
-            </ContentBox>
-        </div>
-    );
+    return <TransactionForm titleAction={'Edit'} mode={'Edit'} onSubmit={submitTransactionRecord} />;
 }
 
 export default EditTransaction;

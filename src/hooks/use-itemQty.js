@@ -26,6 +26,15 @@ function UseItemQty() {
         setItemPrice(price);
     }
 
+    const initItemList = savedItemList => {
+        let totalInitCost = 0;
+        savedItemList.forEach(item => {
+            totalInitCost += Number(item.itemPrice);
+        });
+        setTotalCost(totalInitCost);
+        setItemList(savedItemList);
+    }
+
     const itemChangeHandler = event => {
         setItem(event.target.value);
     };
@@ -52,7 +61,6 @@ function UseItemQty() {
     };
 
     const removeItem = deleteId => {
-        console.log('Click', deleteId);
         itemList.forEach(item => {
             if (item.id === deleteId) {
                 setTotalCost(prevTotalcost => prevTotalcost - Number(item.itemPrice) * Number(item.itemQty));
@@ -109,6 +117,7 @@ function UseItemQty() {
         removeItem,
         reset,
         initFields,
+        initItemList,
         updateItem
     };
 

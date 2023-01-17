@@ -33,9 +33,9 @@ function TransactionDisplay(props) {
 
     return (
         <Link
-            to={"transactionDetail/" + props.docRef }
-            state= {props.details}
-            className={styles.linkStyle}
+            to = {"transactionDetail/" + props.docRef }
+            state = {props.details}
+            className = {styles.linkStyle}
         >
             <button 
                 className={`${styles["button-list"]} 

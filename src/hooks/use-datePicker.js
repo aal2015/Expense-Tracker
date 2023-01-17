@@ -7,6 +7,10 @@ const UseDatePicker = (validateValue) => {
 
     const valueIsValid = validateValue(date);
 
+    const initDate = (day, month, year) => {
+        setDate(dayjs(new Date(`${year}-${month}-${day}`)));
+    }
+
     const dateChangeHandler = newDate => {
         setDate(newDate);
     }
@@ -16,6 +20,7 @@ const UseDatePicker = (validateValue) => {
     }
 
     return {
+        initDate,
         date,
         isValid: valueIsValid,
         dateChangeHandler, 

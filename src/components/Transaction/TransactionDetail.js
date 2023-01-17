@@ -1,4 +1,4 @@
-import { useLocation, Link } from "react-router-dom";
+import { useLocation, Link, useParams } from "react-router-dom";
 import ContentBox from "../UI/ContentBox";
 import { typeIcons, months, typeColor } from "./TransactionDisplay";
 import styles from './TransactionDetail.module.css';
@@ -11,6 +11,7 @@ import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace';
 
 function TransactionDetail() {
     const { state } = useLocation();
+    let { id: documentsId } = useParams();
     const transactionDetail = state;
     const cashFlowIcon = { "out": <ArrowDropDownIcon />, "in": <ArrowDropUpIcon /> }
     const cashFlowColor = { "out": "red", "in": "green" }
@@ -140,17 +141,22 @@ function TransactionDetail() {
                         </>
                     }
                     <Grid2 xs={12} id={styles.editDeleteButton}>
-                        <Button
-                            type="button"
-                            buttonStyle="transactionDetail-edit"
+                        <Link
+                            to={"/editTransaction/" + documentsId}
+                            state={transactionDetail}
                         >
-                            Edit
-                        </Button> | <Button
-                            type="button"
-                            buttonStyle="transactionDetail-delete"
-                        >
-                            Delete
-                        </Button>
+                            <Button
+                                type="button"
+                                buttonStyle="transactionDetail-edit"
+                            >
+                                Edit
+                            </Button>
+                        </Link> | <Button
+                                type="button"
+                                buttonStyle="transactionDetail-delete"
+                            >
+                                Delete
+                            </Button>
                     </Grid2>
                 </Grid2>
             </ContentBox>
