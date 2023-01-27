@@ -8,6 +8,7 @@ import FormSelect from "../UI/FormSelect";
 import FormDatePicker from "../UI/FormDatePicker";
 import FormMultiLineTextInput from "../UI/FormMultiLineTextInput";
 import ItemDialog from "../Edit/ItemDialog";
+import AmountWarningDialog from "./AmountWarningDialog";
 import useInput from "../../hooks/use-input";
 import UseItemQty from "../../hooks/use-itemQty";
 import UseDatePicker from "../../hooks/use-datePicker";
@@ -26,7 +27,9 @@ const properDateFormat = value => dayjs(value, 'DD/MM/YYYY').isValid();
 
 function TransactionForm(props) {
     const [open, setOpen] = useState(false);
+    const [openSubmitDialog, setOpenSubmitDialog] = useState(false);
     const [itemIndexEdit, setItemIndexEdit] = useState(null);
+    const [amountDiffConfirm, setAmountDiffConfirm] = useState(false);
     const { state } = useLocation();
     const variant = "outlined";
 
@@ -73,6 +76,24 @@ function TransactionForm(props) {
     const cashFlowList = ["in", "out"];
     const currencyCodeList = ["THB", "INR", "USD", "EUR"]
 
+    const saveTransactionInput = () => {
+        const day = transactionDateValue.date()
+        const month = transactionDateValue.month()
+        const year = transactionDateValue.year()
+
+        const submitData = {
+            type: typeValue,
+            cashFlow: cashFlowValue,
+            entity: entityValue.trim(),
+            amount: amountValue,
+            currency: currencyValue,
+            transactionDate: Timestamp.fromDate(new Date(`${year}-${month + 1}-${day}`)),
+            description: descriptionValue.trim(),
+            items: itemList
+        }
+        props.onSubmit(submitData);
+    }
+
     const handleClickOpen = id => {
         setItemIndexEdit(id)
         setOpen(true);
@@ -81,6 +102,15 @@ function TransactionForm(props) {
     const handleClose = () => {
         setOpen(false);
     };
+
+    const handleAcceptedSubmitDialog = () => {
+        setAmountDiffConfirm(true);
+        saveTransactionInput();
+    }
+
+    const handleCloseSubmitDialog = () => {
+        setOpenSubmitDialog(false);
+    }
 
     const init = () => {
         const date = state.transactionDate;
@@ -114,24 +144,12 @@ function TransactionForm(props) {
         event.preventDefault();
         if (!formIsValid) {
             return;
+        } else if (!amountDiffConfirm && (Number(amountValue) !== Number(itemTotalCost)) &&
+            Number(itemTotalCost) > 0) {
+            setOpenSubmitDialog(true);
+            return
         }
-
-        const day = transactionDateValue.date()
-        const month = transactionDateValue.month()
-        const year = transactionDateValue.year()
-
-        const submitData = {
-            type: typeValue,
-            cashFlow: cashFlowValue,
-            entity: entityValue.trim(),
-            amount: amountValue,
-            currency: currencyValue,
-            transactionDate: Timestamp.fromDate(new Date(`${year}-${month + 1}-${day}`)),
-            description: descriptionValue.trim(),
-            items: itemList
-        }
-
-        props.onSubmit(submitData);
+        saveTransactionInput();
     }
 
     return (
@@ -237,6 +255,12 @@ function TransactionForm(props) {
                 open={open} setOpen={setOpen} handleClose={handleClose}
                 item={itemList[itemIndexEdit]} itemIndexEdit={itemIndexEdit}
                 updateItem={updateItem}
+            />
+
+            <AmountWarningDialog
+                open={openSubmitDialog} setOpen={setOpenSubmitDialog}
+                handleClose={handleCloseSubmitDialog} 
+                handleAccept= {handleAcceptedSubmitDialog}
             />
         </div>
     )
