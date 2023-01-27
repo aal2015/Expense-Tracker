@@ -7,7 +7,6 @@ import { doc, updateDoc } from "firebase/firestore";
 function EditTransaction() {
     const navigate = useNavigate();
     const { id: documentId } = useParams();
-    // const collectionRef = getDoc(doc(db, "transactions", documentId)).then(data => {console.log(data.data());})
 
     const submitTransactionRecord = async (submitData) => {
         try {

@@ -141,3 +141,29 @@
 .transactionDetail-delete:hover {
     background-color: #eb0a2c;
 }
+
+.confirmTransactionRecordDelete {
+    background-color: black;
+    color: white;
+    width: 100px;
+    font-size: 16px;
+    border-radius: 20px;
+    border: 2px solid black;
+}
+
+.confirmTransactionRecordDelete:hover {
+    background-color: rgb(43, 43, 43);
+}
+
+.cancelTransactionRecordDelete {
+    background-color: rgb(212, 211, 211);
+    color: black;
+    width: 100px;
+    font-size: 16px;
+    border-radius: 20px;
+    border: 2px solid black;
+}
+
+.cancelTransactionRecordDelete:hover {
+    background-color: rgb(151, 151, 151);
+}

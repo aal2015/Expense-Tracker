@@ -1,17 +1,25 @@
-import { useLocation, Link, useParams } from "react-router-dom";
+import { useState } from "react";
+import { useLocation, Link, useParams, useNavigate } from "react-router-dom";
+import ConfirmDeleteDialog from "./ConfirmDeleteDialog";
 import ContentBox from "../UI/ContentBox";
 import { typeIcons, months, typeColor } from "./TransactionDisplay";
 import styles from './TransactionDetail.module.css';
 import Button from "../UI/Button";
+import { db } from "../../firebase/firebaseConfig.js";
 
 import Grid2 from '@mui/material/Unstable_Grid2';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import ArrowDropUpIcon from '@mui/icons-material/ArrowDropUp';
 import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace';
 
+import { doc, deleteDoc } from "firebase/firestore";
+
 function TransactionDetail() {
     const { state } = useLocation();
+    const [openDeleteDialog, setOpenDeleteDialog] = useState(false);
     let { id: documentsId } = useParams();
+    const navigate = useNavigate();
+
     const transactionDetail = state;
     const cashFlowIcon = { "out": <ArrowDropDownIcon />, "in": <ArrowDropUpIcon /> }
     const cashFlowColor = { "out": "red", "in": "green" }
@@ -30,6 +38,20 @@ function TransactionDetail() {
 
     const attribute_width_size = 4;
     const value_width_size = 8;
+
+    const handleDeleteDialogClickOpen = () => {
+        setOpenDeleteDialog(true);
+    };
+
+    const handleDeleteDialogClose = () => {
+        setOpenDeleteDialog(false);
+    };
+
+    const deleteHandler = async () => {
+        await deleteDoc(doc(db, "transactions", documentsId));
+        console.log("Transaction record deleted successfully.");
+        navigate("..");
+    }
 
     return (
         <div id={styles["background"]}>
@@ -152,14 +174,21 @@ function TransactionDetail() {
                                 Edit
                             </Button>
                         </Link> | <Button
-                                type="button"
-                                buttonStyle="transactionDetail-delete"
-                            >
-                                Delete
-                            </Button>
+                            type="button"
+                            buttonStyle="transactionDetail-delete"
+                            clickHandler={handleDeleteDialogClickOpen}
+                        >
+                            Delete
+                        </Button>
                     </Grid2>
                 </Grid2>
             </ContentBox>
+
+            <ConfirmDeleteDialog
+                open={openDeleteDialog}
+                handleClose={handleDeleteDialogClose}
+                onDeleteHandler={deleteHandler}
+            />
         </div>
     )
 }
