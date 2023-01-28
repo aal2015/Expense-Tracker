@@ -1,4 +1,5 @@
 import Button from '../UI/Button';
+import styles from './ConfirmDeleteDialog.module.css';
 
 import Dialog from '@mui/material/Dialog';
 import DialogTitle from '@mui/material/DialogTitle';
@@ -11,13 +12,13 @@ function ConfirmDeleteDialog(props) {
             open={props.open}
             onClose={props.handleClose}
         >
-            <DialogTitle >
+            <DialogTitle>
                 Confirm Delete
             </DialogTitle>
             <DialogContent>
                 Are you sure you want to delete the transaction record permanently?
             </DialogContent>
-            <DialogActions>
+            <div id={styles.optionButtons}>
                 <Button
                     type="button"
                     buttonStyle="cancelTransactionRecordDelete"
@@ -31,7 +32,7 @@ function ConfirmDeleteDialog(props) {
                 >
                     Yes
                 </Button>
-            </DialogActions>
+            </div>
         </Dialog>
     );
 }
