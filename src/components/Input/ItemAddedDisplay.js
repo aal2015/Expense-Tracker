@@ -26,39 +26,37 @@ function ItemAddedDisplay(props) {
     const items = (
         <>
             {props.itemList.map((item, id) => (
-                <>
-                    <div key={id} className={styles.itemDisplay}>
-                        <Grid container spacing={1}>
-                            <Grid item xs={5}>
-                                <p className={styles.displayCell}>{item.item}</p>
-                            </Grid>
-                            <Grid item xs={2}>
-                                <p className={styles.displayCell}>{item.itemQty}</p>
-                            </Grid>
-                            <Grid item xs={3}>
-                                <p className={styles.displayCell}>{item.itemPrice}</p>
-                            </Grid>
-                            <Grid item xs={2}>
-                                <ButtonGroup 
-                                    variant="text" 
-                                    aria-label="outlined primary button group"
-                                    id={styles.groupButton}    
-                                >
-                                    <Button
-                                        type="button"
-                                        buttonStyle="edit-item-button"
-                                        clickHandler={() => props.handleClickOpen(id)}
-                                    >Edit</Button>
-                                    <Button
-                                        type="button"
-                                        buttonStyle="addTransaction-removeItem-button"
-                                        clickHandler={() => props.removeItem(item.id)}
-                                    >X</Button>
-                                </ButtonGroup>
-                            </Grid>
+                <div key={id} className={styles.itemDisplay}>
+                    <Grid container spacing={1}>
+                        <Grid item xs={5}>
+                            <p className={styles.displayCell}>{item.item}</p>
                         </Grid>
-                    </div>
-                </>
+                        <Grid item xs={2}>
+                            <p className={styles.displayCell}>{item.itemQty}</p>
+                        </Grid>
+                        <Grid item xs={3}>
+                            <p className={styles.displayCell}>{item.itemPrice}</p>
+                        </Grid>
+                        <Grid item xs={2}>
+                            <ButtonGroup
+                                variant="text"
+                                aria-label="outlined primary button group"
+                                id={styles.groupButton}
+                            >
+                                <Button
+                                    type="button"
+                                    buttonStyle="edit-item-button"
+                                    clickHandler={() => props.handleClickOpen(id)}
+                                >Edit</Button>
+                                <Button
+                                    type="button"
+                                    buttonStyle="addTransaction-removeItem-button"
+                                    clickHandler={() => props.removeItem(item.id)}
+                                >X</Button>
+                            </ButtonGroup>
+                        </Grid>
+                    </Grid>
+                </div>
             ))}
         </>
     );
