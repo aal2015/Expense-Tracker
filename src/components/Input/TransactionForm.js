@@ -132,8 +132,13 @@ function TransactionForm(props) {
     useEffect(() => {
         if (props.mode === "Edit") {
             init();
+        } else {
+            typeInitHandler("Food/Drink");
+            cashFlowInitHandler("out");
+            currencyInitHandler("INR");
         }
     }, [])
+
 
     const clearFormHandler = () => {
         resetEntity(); resetType(); resetCashFlow(); resetAmount(); resetCurrency();
@@ -259,8 +264,8 @@ function TransactionForm(props) {
 
             <AmountWarningDialog
                 open={openSubmitDialog} setOpen={setOpenSubmitDialog}
-                handleClose={handleCloseSubmitDialog} 
-                handleAccept= {handleAcceptedSubmitDialog}
+                handleClose={handleCloseSubmitDialog}
+                handleAccept={handleAcceptedSubmitDialog}
             />
         </div>
     )
