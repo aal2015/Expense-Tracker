@@ -14,6 +14,7 @@ import UseItemQty from "../../hooks/use-itemQty";
 import UseDatePicker from "../../hooks/use-datePicker";
 import styles from './AddTransaction.module.css';
 import { typeColor } from "../Transaction/TransactionDisplay";
+import currencyCodeList from "../Transaction/CurrencyCodeList";
 
 import { Link, useLocation } from "react-router-dom";
 import { Timestamp } from "firebase/firestore";
@@ -74,7 +75,6 @@ function TransactionForm(props) {
 
     const typeList = Object.keys(typeColor);
     const cashFlowList = ["in", "out"];
-    const currencyCodeList = ["THB", "INR", "USD", "EUR"]
 
     const saveTransactionInput = () => {
         const day = transactionDateValue.date()

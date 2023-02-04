@@ -11,6 +11,7 @@ import Homepage from './Homepage';
 import TransactionDetail from './components/Transaction/TransactionDetail';
 import AddTransaction from './components/Input/AddTransaction';
 import EditTransaction from './components/Edit/EditTransaction';
+import { CurrencyContextProvider } from './context/currency-context';
 
 const router = createBrowserRouter([
   {
@@ -41,9 +42,9 @@ const router = createBrowserRouter([
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-
-    <RouterProvider router={router} />
-
+    <CurrencyContextProvider>
+      <RouterProvider router={router} />
+    </CurrencyContextProvider>
   </React.StrictMode>
 );
 
