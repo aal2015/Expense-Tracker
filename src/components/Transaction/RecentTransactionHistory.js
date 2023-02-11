@@ -53,10 +53,11 @@ function RecentTransactionHistory() {
                         </div>
                     ))
                 }
+                {loading && <LoadSpinner />}
+                {loadError && <ErrorDisplay />}
             </div>
 
-            {loading && <LoadSpinner />}
-            {loadError && <ErrorDisplay />}
+
         </ContentBox>
     );
 }
