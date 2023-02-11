@@ -2,3 +2,7 @@
     background-color: white;
     padding: 15px 40px;
 }
+
+.header {
+    flex: 0 1 auto;
+}

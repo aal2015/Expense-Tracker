@@ -39,17 +39,21 @@ function RecentTransactionHistory() {
     }, [])
 
     return (
-        <ContentBox>
-            <h3>Recent Transactions (upto last 50 Transactions)</h3>
+        <ContentBox classStyle="content-spacing">
+            <h3 id={styles["transaction-header"]}>
+                Recent Transactions (upto last 50 Transactions)
+            </h3>
 
-            {transactionHist && !loading &&
-                transactionHist.map((item, id) => (
-                    <div key={id}>
-                        {id !== 0 && <hr className={styles["hr-style"]} />}
-                        <TransactionDisplay details={item.data} docRef={item.docRef} />
-                    </div>
-                ))
-            }
+            <div id={styles["transaction-record"]}>
+                {transactionHist && !loading &&
+                    transactionHist.map((item, id) => (
+                        <div key={id}>
+                            {id !== 0 && <hr className={styles["hr-style"]} />}
+                            <TransactionDisplay details={item.data} docRef={item.docRef} />
+                        </div>
+                    ))
+                }
+            </div>
 
             {loading && <LoadSpinner />}
             {loadError && <ErrorDisplay />}

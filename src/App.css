@@ -2,10 +2,12 @@ body {
     background-color: #EFF5F5;
 }
 
-html, body {
+#root {
     height: 100%;
 }
 
-.side-margin {
-    margin: 0 20px;
+.box {
+    display: flex;
+    flex-flow: column;
+    height: 100%;
 }

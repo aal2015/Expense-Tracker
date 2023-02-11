@@ -1,5 +1,4 @@
 import styles from './Header.module.css';
-// import TimeZoneSelect from './TimeZoneSelect';
 
 import InsightsIcon from '@mui/icons-material/Insights';
 
@@ -10,9 +9,6 @@ function Header() {
                 <h4>Track Your Expense</h4>
                 <InsightsIcon />
             </div>
-
-            {/* <TimeZoneSelect /> */}
-
             <div>
                 <button>Log In</button>
             </div>

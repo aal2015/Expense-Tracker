@@ -5,10 +5,10 @@ import Box from "./components/UI/Box";
 
 function App() {
   return (
-    <>
-      <Box><Header /></Box>
+    <div className="box">
+      <Box boxClassStyle="header"><Header /></Box>
       <Outlet />
-    </>
+    </div>
   );
 }
 
