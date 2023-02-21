@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import ContentBox from "../UI/ContentBox";
 import TransactionDisplay from "./TransactionDisplay";
+import RadioOptions from "../UI/RadioOptions";
 import LoadSpinner from "../UI/LoadSpinner";
 import ErrorDisplay from "../UI/ErrorDisplay";
 import styles from './RecentTransactionHistory.module.css';
@@ -12,12 +13,16 @@ function RecentTransactionHistory() {
     const [transactionHist, setTransactionHist] = useState([]);
     const [loading, setLoading] = useState(true);
     const [loadError, setLoadError] = useState(false);
+    const [radioSelect, setRadioSelect] = useState("Yes");
 
     const transactionRef = collection(db, 'transactions');
-    // const thirtyDaysAgo = new Date() - 1000 * 60 * 60 * 24 * 10000;
-    // const thirtyDaysAgoDate = new Date(thirtyDaysAgo);
-    // const q = query(transactionRef, orderBy("transactionDate"), where("transactionDate", ">=", thirtyDaysAgoDate));
     const q = query(transactionRef, orderBy("transactionDate", "desc"), limit(50));
+
+    const radioChangeHandler = event => {
+        setRadioSelect(event.target.value);
+    }
+
+    const radioLabels = ["Yes", "No"];
 
     useEffect(() => {
         getDocs(q).then((querySnapshot) => {
@@ -43,6 +48,14 @@ function RecentTransactionHistory() {
             <h3 id={styles["transaction-header"]}>
                 Recent Transactions (upto last 50 Transactions)
             </h3>
+
+            <div>
+                <RadioOptions 
+                    label={"View in Currency Originally Saved:"} 
+                    options={radioLabels} value={radioSelect}
+                    changeHandler={radioChangeHandler}  
+                />
+            </div>
 
             <div id={styles["transaction-record"]}>
                 {transactionHist && !loading &&

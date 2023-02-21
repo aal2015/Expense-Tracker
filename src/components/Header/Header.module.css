@@ -19,3 +19,7 @@
 #flex-container button:hover {
     cursor: pointer;
 }
+
+#currency-display {
+    width: 170px;
+}

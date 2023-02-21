@@ -1,5 +1,7 @@
+import { useContext } from "react";
 import { Link } from "react-router-dom";
 import styles from './TransactionDisplay.module.css';
+import CurrencyContext from "../../context/currency-context";
 
 import FastfoodIcon from '@mui/icons-material/Fastfood';
 import LocalGroceryStoreIcon from '@mui/icons-material/LocalGroceryStore';
@@ -9,6 +11,8 @@ import AccountBalanceIcon from '@mui/icons-material/AccountBalance';
 import PostAddIcon from '@mui/icons-material/PostAdd';
 import EventIcon from '@mui/icons-material/Event';
 
+import CurrencyConverter from 'react-currency-conv';
+
 export const typeIcons = {
     "Food/Drink": <FastfoodIcon />, "Grocery": <LocalGroceryStoreIcon />,
     "Bill": <ReceiptLongIcon />, "Travel": <FlightIcon />,
@@ -17,7 +21,7 @@ export const typeIcons = {
 };
 
 export const typeColor = {
-    "Food/Drink": "red", "Grocery": "orange", "Institution": "brown", "Bill": "green", 
+    "Food/Drink": "red", "Grocery": "orange", "Institution": "brown", "Bill": "green",
     "Travel": "#0073cf", "Other": "Gray", "Event": "#0081C9"
 }
 
@@ -31,26 +35,30 @@ function TransactionDisplay(props) {
     const month = months[date.getMonth()];
     const day = date.getDate();
 
+    const currencyCtx = useContext(CurrencyContext);
+
     return (
         <Link
-            to = {"transactionDetail/" + props.docRef }
-            state = {props.details}
-            className = {styles.linkStyle}
+            to={"transactionDetail/" + props.docRef}
+            state={props.details}
+            className={styles.linkStyle}
         >
-            <button 
+            <button
                 className={`${styles["button-list"]} 
-                ${styles["grid-container"]}`} 
-                style={{borderLeft: `6px solid ${typeColor[props.details.type]}`}}
+                ${styles["grid-container"]}`}
+                style={{ borderLeft: `6px solid ${typeColor[props.details.type]}` }}
             >
                 <p>{typeIcons[props.details.type]}</p>
                 <div>
                     <h2>{props.details.entity}</h2>
                     <p className={styles["time-format"]}>{day} {month} {year}</p>
                 </div>
-                <p className={styles['amount-format']}>฿ {props.details.amount}</p>
+                <p className={styles['amount-format']}>฿
+                    {props.details.amount}
+                </p>
             </button>
         </Link>
-    );  
+    );
 }
 
 export default TransactionDisplay;
