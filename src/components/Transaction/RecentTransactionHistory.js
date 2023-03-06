@@ -13,7 +13,7 @@ function RecentTransactionHistory() {
     const [transactionHist, setTransactionHist] = useState([]);
     const [loading, setLoading] = useState(true);
     const [loadError, setLoadError] = useState(false);
-    const [radioSelect, setRadioSelect] = useState("Yes");
+    const [radioSelect, setRadioSelect] = useState("No");
 
     const transactionRef = collection(db, 'transactions');
     const q = query(transactionRef, orderBy("transactionDate", "desc"), limit(50));
@@ -22,7 +22,7 @@ function RecentTransactionHistory() {
         setRadioSelect(event.target.value);
     }
 
-    const radioLabels = ["Yes", "No"];
+    const radioLabels = ["No", "Yes"];
 
     useEffect(() => {
         getDocs(q).then((querySnapshot) => {
@@ -50,10 +50,10 @@ function RecentTransactionHistory() {
             </h3>
 
             <div>
-                <RadioOptions 
-                    label={"View in Currency Originally Saved:"} 
+                <RadioOptions
+                    label={"View All in Same Currency:"}
                     options={radioLabels} value={radioSelect}
-                    changeHandler={radioChangeHandler}  
+                    changeHandler={radioChangeHandler}
                 />
             </div>
 
@@ -62,7 +62,11 @@ function RecentTransactionHistory() {
                     transactionHist.map((item, id) => (
                         <div key={id}>
                             {id !== 0 && <hr className={styles["hr-style"]} />}
-                            <TransactionDisplay details={item.data} docRef={item.docRef} />
+                            <TransactionDisplay
+                                details={item.data}
+                                docRef={item.docRef}
+                                sameCurrency={radioSelect}
+                            />
                         </div>
                     ))
                 }

@@ -1,5 +1,6 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { Link } from "react-router-dom";
+import currency_symbols from "./CurrencySymbol";
 import styles from './TransactionDisplay.module.css';
 import CurrencyContext from "../../context/currency-context";
 
@@ -10,8 +11,6 @@ import FlightIcon from '@mui/icons-material/Flight';
 import AccountBalanceIcon from '@mui/icons-material/AccountBalance';
 import PostAddIcon from '@mui/icons-material/PostAdd';
 import EventIcon from '@mui/icons-material/Event';
-
-import CurrencyConverter from 'react-currency-conv';
 
 export const typeIcons = {
     "Food/Drink": <FastfoodIcon />, "Grocery": <LocalGroceryStoreIcon />,
@@ -29,13 +28,34 @@ export const months = ["January", "February", "March", "April", "May", "June", "
     "September", "October", "November", "December"];
 
 function TransactionDisplay(props) {
+    const initCurrencySymbol = currency_symbols[props.details.currency];
+    const [currencySymbol, setCrrencySymbol] = useState(initCurrencySymbol);
+    const [amount, setAmount] = useState(props.details.amount);
+
+    const currencyCtx = useContext(CurrencyContext);
     const date = props.details.transactionDate;
 
     const year = date.getFullYear();
     const month = months[date.getMonth()];
     const day = date.getDate();
 
-    const currencyCtx = useContext(CurrencyContext);
+    const convertCurrency = (base, finalCur) => {
+        const url = `https://api.apilayer.com/fixer/latest?apikey=OYLPCwB4wRNTtISxyRhWJcLXmvXLXjPp&base=${base}&symbols=${finalCur}`;
+
+        fetch(url, {
+            method: 'GET',
+        }).then(
+            res => res.json()
+        ).then(res => console.log(res));
+    }
+
+    if (props.sameCurrency === "Yes"){
+        console.log("Call convertCurrency function");
+    } else if (props.sameCurrency === "No") {
+        if (amount !== props.details.amount) {
+            setAmount(props.details.amount);
+        } 
+    }
 
     return (
         <Link
@@ -53,8 +73,8 @@ function TransactionDisplay(props) {
                     <h2>{props.details.entity}</h2>
                     <p className={styles["time-format"]}>{day} {month} {year}</p>
                 </div>
-                <p className={styles['amount-format']}>฿
-                    {props.details.amount}
+                <p className={styles['amount-format']}>
+                    {currencySymbol} {amount}
                 </p>
             </button>
         </Link>

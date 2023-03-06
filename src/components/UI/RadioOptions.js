@@ -5,7 +5,6 @@ import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
 
 function RadioOptions(props) {
-    console.log(props.options);
 
     return (
         <FormControl>
