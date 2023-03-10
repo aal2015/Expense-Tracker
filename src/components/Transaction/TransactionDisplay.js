@@ -39,18 +39,24 @@ function TransactionDisplay(props) {
     const month = months[date.getMonth()];
     const day = date.getDate();
 
-    const convertCurrency = (base, finalCur) => {
+    const convertCurrency = (base, finalCur, amount) => {
         const url = `https://api.apilayer.com/fixer/latest?apikey=OYLPCwB4wRNTtISxyRhWJcLXmvXLXjPp&base=${base}&symbols=${finalCur}`;
 
         fetch(url, {
             method: 'GET',
         }).then(
             res => res.json()
-        ).then(res => console.log(res));
+        ).then(res => {
+            // console.log(base, finalCur, res.rates[finalCur], amount * res.rates[finalCur])
+            const convertedAmount   = Math.round(amount * res.rates[finalCur]);
+            const convertedCurrency = currency_symbols[finalCur];
+            setAmount(convertedAmount);
+            setCrrencySymbol(convertedCurrency);
+        });
     }
 
-    if (props.sameCurrency === "Yes"){
-        console.log("Call convertCurrency function");
+    if (props.sameCurrency === "Yes" && props.details.currency !== currencyCtx.currencyCode){
+        convertCurrency(props.details.currency, currencyCtx.currencyCode, props.details.amount);
     } else if (props.sameCurrency === "No") {
         if (amount !== props.details.amount) {
             setAmount(props.details.amount);
