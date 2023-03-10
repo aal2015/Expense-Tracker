@@ -67,7 +67,7 @@ function TransactionDetail() {
                 <Grid2 container spacing={3} id={styles.maxRowWidth} >
                     {/* Row 1 */}
                     <Grid2 xs={attribute_width_size}>
-                        <p>Type:</p>
+                        <p className={styles.tableHeading}>Type:</p>
                     </Grid2>
                     <Grid2 xs={value_width_size}>
                         <p
@@ -80,7 +80,7 @@ function TransactionDetail() {
 
                     {/* Row 2 */}
                     <Grid2 xs={attribute_width_size}>
-                        <p>Class Flow:</p>
+                        <p className={styles.tableHeading}>Class Flow:</p>
                     </Grid2>
                     <Grid2 xs={value_width_size}>
                         <p>
@@ -93,7 +93,7 @@ function TransactionDetail() {
 
                     {/* Row 3 */}
                     <Grid2 xs={attribute_width_size}>
-                        <p>Entity:</p>
+                        <p className={styles.tableHeading}>Entity:</p>
                     </Grid2>
                     <Grid2 xs={value_width_size}>
                         <p>{transactionDetail.entity}</p>
@@ -101,7 +101,7 @@ function TransactionDetail() {
 
                     {/* Row 4  */}
                     <Grid2 xs={attribute_width_size}>
-                        <p>Amount:</p>
+                        <p className={styles.tableHeading}>Amount:</p>
                     </Grid2>
                     <Grid2 xs={value_width_size}>
                         <p>{transactionDetail.amount}</p>
@@ -109,7 +109,7 @@ function TransactionDetail() {
 
                     {/* Row 5 */}
                     <Grid2 xs={attribute_width_size}>
-                        <p>Currency:</p>
+                        <p className={styles.tableHeading}>Currency:</p>
                     </Grid2>
                     <Grid2 xs={value_width_size}>
                         <p>{transactionDetail.currency}</p>
@@ -117,7 +117,7 @@ function TransactionDetail() {
 
                     {/* Row 6 */}
                     <Grid2 xs={attribute_width_size}>
-                        <p>Transaction Date:</p>
+                        <p className={styles.tableHeading}>Transaction Date:</p>
                     </Grid2>
                     <Grid2 xs={value_width_size}>
                         <p>
@@ -127,7 +127,7 @@ function TransactionDetail() {
 
                     {/* Row 7 */}
                     <Grid2 xs={attribute_width_size}>
-                        <p>Description:</p>
+                        <p className={styles.tableHeading}>Description:</p>
                     </Grid2>
                     <Grid2 xs={value_width_size}>
                         <p>{transactionDetail.description}</p>
@@ -137,7 +137,7 @@ function TransactionDetail() {
                     {transactionDetail.items.length > 0 &&
                         <>
                             <Grid2 xs={attribute_width_size}>
-                                <p>Items:</p>
+                                <p className={styles.tableHeading}>Items:</p>
                             </Grid2>
                             <Grid2 xs={value_width_size}>
                                 <table>

@@ -27,6 +27,10 @@
     border-radius: 10px;
 }
 
-#editDeleteButton { 
+#editDeleteButton {
     text-align: center;
+}
+
+.tableHeading {
+    font-weight: bold;
 }
