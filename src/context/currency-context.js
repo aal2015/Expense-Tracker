@@ -9,7 +9,7 @@ export const CurrencyContextProvider = props => {
     const [currencyCode, setCurrencyCode] = useState("THB");
 
     const changeCurrencyCode = newCurrencyCode =>  {
-        setCurrencyCode(currencyCode);
+        setCurrencyCode(newCurrencyCode.target.value);
     }
 
     return <CurrencyContext.Provider

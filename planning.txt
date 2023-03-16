@@ -1,0 +1,10 @@
+//// Home Page Dasboard
+- Pie chart for today spending
+- Bar plot for this week spending
+- money remaining and expense total
+- net money flow
+
+- Bar plot for money spend per year, month, and day
+- total transactions per day
+- Popular categories by ascending order
+- Income vs Expense Plot

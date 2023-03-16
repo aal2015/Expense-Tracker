@@ -1,16 +1,14 @@
-import { useState } from 'react';
+import { useContext } from 'react';
 import FormSelect from '../UI/FormSelect';
 import currencyCodeList from '../Transaction/CurrencyCodeList';
 import styles from './Header.module.css';
+import CurrencyContext from '../../context/currency-context';
 
 import InsightsIcon from '@mui/icons-material/Insights';
 
 function Header() {
-    const [currency, setCurrency] = useState('THB');
-
-    const currencyChangeHandler= event => {
-        setCurrency(event.target.value);
-    }
+    const currencyCtx = useContext(CurrencyContext);
+    console.log(currencyCtx.currencyCode);
 
     return (
         <div id={styles['flex-container']}>
@@ -20,8 +18,8 @@ function Header() {
             </div>
             <div id={styles['currency-display']}>
                 <FormSelect
-                    label="Currency Display" value={currency} 
-                    itemValues={currencyCodeList} changeHandler={currencyChangeHandler}
+                    label="Currency Display" value={currencyCtx.currencyCode} 
+                    itemValues={currencyCodeList} changeHandler={currencyCtx.changeCurrencyCode}
                 />
             </div>
             <div>
