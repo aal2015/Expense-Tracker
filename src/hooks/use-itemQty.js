@@ -29,7 +29,7 @@ function UseItemQty() {
     const initItemList = savedItemList => {
         let totalInitCost = 0;
         savedItemList.forEach(item => {
-            totalInitCost += Number(item.itemPrice);
+            totalInitCost += Number(item.itemPrice) * Number(item.itemQty);
         });
         setTotalCost(totalInitCost);
         setItemList(savedItemList);
