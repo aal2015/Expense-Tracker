@@ -1,6 +1,7 @@
 #flex-container {
     display: flex;
     justify-content: space-between;
+    position: relative;
 }
 
 #flex-container h4 {
@@ -22,4 +23,13 @@
 
 #currency-display {
     width: 170px;
+}
+
+#homepageLink {
+    text-decoration: inherit;
+    color: black;
+    position: absolute;
+    top: 50%;
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
 }
