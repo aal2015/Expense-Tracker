@@ -39,6 +39,10 @@ function TransactionDetail() {
     const attribute_width_size = 4;
     const value_width_size = 8;
 
+    const previousPageNavigate = () => {
+        navigate(-1);
+    }
+
     const handleDeleteDialogClickOpen = () => {
         setOpenDeleteDialog(true);
     };
@@ -56,11 +60,9 @@ function TransactionDetail() {
     return (
         <div id={styles["background"]}>
             <ContentBox >
-                <Link to={'..'}>
-                    <Button buttonStyle="backButton">
-                        <KeyboardBackspaceIcon />
-                    </Button>
-                </Link>
+                <Button buttonStyle="backButton" clickHandler={previousPageNavigate}>
+                    <KeyboardBackspaceIcon />
+                </Button>
 
                 <h1>Transaction Detail</h1>
 

@@ -16,7 +16,7 @@ import styles from './AddTransaction.module.css';
 import { typeColor } from "../Transaction/TransactionDisplay";
 import currencyCodeList from "../Transaction/CurrencyCodeList";
 
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Timestamp } from "firebase/firestore";
 
 import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace';
@@ -33,6 +33,7 @@ function TransactionForm(props) {
     const [amountDiffConfirm, setAmountDiffConfirm] = useState(false);
     const { state } = useLocation();
     const variant = "outlined";
+    const navigate = useNavigate();
 
     const {
         initHandler: entityInitHandler, value: entityValue, isValid: entityIsValid,
@@ -92,6 +93,10 @@ function TransactionForm(props) {
             items: itemList
         }
         props.onSubmit(submitData);
+    }
+
+    const previousPageNavigate = () => {
+        navigate(-1);
     }
 
     const handleClickOpen = id => {
@@ -161,11 +166,9 @@ function TransactionForm(props) {
         <div id={styles["background"]}>
             <ContentBox>
                 <div id={styles["backButtonAlign"]}>
-                    <Link to={'..'}>
-                        <Button buttonStyle="backButton">
+                        <Button buttonStyle="backButton" clickHandler={previousPageNavigate}>
                             <KeyboardBackspaceIcon />
                         </Button>
-                    </Link>
                 </div>
 
                 <h1>{props.titleAction} Transaction Record</h1>
