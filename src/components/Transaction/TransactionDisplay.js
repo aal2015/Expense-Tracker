@@ -12,6 +12,8 @@ import AccountBalanceIcon from '@mui/icons-material/AccountBalance';
 import PostAddIcon from '@mui/icons-material/PostAdd';
 import EventIcon from '@mui/icons-material/Event';
 
+import { Convert } from "easy-currencies";
+
 export const typeIcons = {
     "Food/Drink": <FastfoodIcon />, "Grocery": <LocalGroceryStoreIcon />,
     "Bill": <ReceiptLongIcon />, "Travel": <FlightIcon />,
@@ -29,7 +31,7 @@ export const months = ["January", "February", "March", "April", "May", "June", "
 
 function TransactionDisplay(props) {
     const initCurrencySymbol = currency_symbols[props.details.currency];
-    const [currencySymbol, setCrrencySymbol] = useState(initCurrencySymbol);
+    const [currencySymbol, setCurrencySymbol] = useState(initCurrencySymbol);
     const [amount, setAmount] = useState(props.details.amount);
 
     const currencyCtx = useContext(CurrencyContext);
@@ -40,51 +42,58 @@ function TransactionDisplay(props) {
     const day = date.getDate();
 
     const convertCurrency = (base, finalCur, amount) => {
-        const url = `https://api.apilayer.com/fixer/latest?apikey=OYLPCwB4wRNTtISxyRhWJcLXmvXLXjPp&base=${base}&symbols=${finalCur}`;
+        // const url = `https://api.apilayer.com/fixer/latest?apikey=OYLPCwB4wRNTtISxyRhWJcLXmvXLXjPp&base=${base}&symbols=${finalCur}`;
 
-        fetch(url, {
-            method: 'GET',
-        }).then(
-            res => res.json()
-        ).then(res => {
-            // console.log(base, finalCur, res.rates[finalCur], amount * res.rates[finalCur])
-            const convertedAmount   = Math.round(amount * res.rates[finalCur]);
-            const convertedCurrency = currency_symbols[finalCur];
-            setAmount(convertedAmount);
-            setCrrencySymbol(convertedCurrency);
-        });
+        // fetch(url, {
+        //     method: 'GET',
+        // }).then(
+        //     res => res.json()
+        // ).then(res => {
+        //     // console.log(base, finalCur, res.rates[finalCur], amount * res.rates[finalCur])
+        //     const convertedAmount   = Math.round(amount * res.rates[finalCur]);
+        //     const convertedCurrency = currency_symbols[finalCur];
+        //     setAmount(convertedAmount);
+        //     setCrrencySymbol(convertedCurrency);
+        // });
+
+        Convert(amount).from(base).to(finalCur)
+            .then(convertedAmount => {
+                const convertedCurrency = currency_symbols[finalCur];
+                setAmount(Math.round(convertedAmount));
+                setCurrencySymbol(convertedCurrency);
+            });
+}
+
+if (props.sameCurrency === "Yes" && props.details.currency !== currencyCtx.currencyCode) {
+    convertCurrency(props.details.currency, currencyCtx.currencyCode, props.details.amount);
+} else if (props.sameCurrency === "No") {
+    if (amount !== props.details.amount) {
+        setAmount(props.details.amount);
     }
+}
 
-    if (props.sameCurrency === "Yes" && props.details.currency !== currencyCtx.currencyCode){
-        convertCurrency(props.details.currency, currencyCtx.currencyCode, props.details.amount);
-    } else if (props.sameCurrency === "No") {
-        if (amount !== props.details.amount) {
-            setAmount(props.details.amount);
-        } 
-    }
-
-    return (
-        <Link
-            to={"transactionDetail/" + props.docRef}
-            state={props.details}
-            className={styles.linkStyle}
-        >
-            <button
-                className={`${styles["button-list"]} 
+return (
+    <Link
+        to={"transactionDetail/" + props.docRef}
+        state={props.details}
+        className={styles.linkStyle}
+    >
+        <button
+            className={`${styles["button-list"]} 
                 ${styles["grid-container"]}`}
-                style={{ borderLeft: `6px solid ${typeColor[props.details.type]}` }}
-            >
-                <p>{typeIcons[props.details.type]}</p>
-                <div>
-                    <h2>{props.details.entity}</h2>
-                    <p className={styles["time-format"]}>{day} {month} {year}</p>
-                </div>
-                <p className={styles['amount-format']}>
-                    {currencySymbol} {amount}
-                </p>
-            </button>
-        </Link>
-    );
+            style={{ borderLeft: `6px solid ${typeColor[props.details.type]}` }}
+        >
+            <p>{typeIcons[props.details.type]}</p>
+            <div>
+                <h2>{props.details.entity}</h2>
+                <p className={styles["time-format"]}>{day} {month} {year}</p>
+            </div>
+            <p className={styles['amount-format']}>
+                {currencySymbol} {amount}
+            </p>
+        </button>
+    </Link>
+);
 }
 
 export default TransactionDisplay;
