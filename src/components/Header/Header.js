@@ -10,7 +10,6 @@ import InsightsIcon from '@mui/icons-material/Insights';
 
 function Header() {
     const currencyCtx = useContext(CurrencyContext);
-    console.log(currencyCtx.currencyCode);
 
     return (
         <div id={styles['flex-container']}>

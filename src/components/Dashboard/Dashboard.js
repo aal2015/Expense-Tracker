@@ -16,6 +16,9 @@ function Dashboard() {
     const currentMonth = todayDate.getMonth();
     const lastSundayDate = new Date(currentYear, currentMonth, lastSundayDay);
 
+    const days        = ["Sun", "Mon", "Tue", "Wed", "Thur", "Fri", "Sat"];
+    let expensePerDay = [0, 0, 0, 0, 0, 0, 0]
+
     const transactionRef = collection(db, 'transactions');
     const q = query(
         transactionRef,
@@ -38,13 +41,25 @@ function Dashboard() {
         }).catch(error => {
             console.log(error);
         });
-    }, [])
-    
+    }, []);
 
+    const calculateDailyExpense = transactions => {
+        transactions.forEach(transaction => {
+            const date    = transaction.transactionDate;
+            const dateIdx = date.getDate() - lastSundayDate.getDate();
+            const amount = parseInt(transaction.amount);
+            expensePerDay[dateIdx] += amount;
+        });
+    }
+
+    if (transactionData.length > 0) {
+        calculateDailyExpense(transactionData);
+    }
+    
     return (
         <ContentBox>
             <h3>Spending Statistics</h3>
-            <BarChart transactionData={transactionData} />
+            <BarChart data={expensePerDay} label={days} />
         </ContentBox>
     )
 }

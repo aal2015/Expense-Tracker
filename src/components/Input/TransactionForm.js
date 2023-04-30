@@ -77,6 +77,12 @@ function TransactionForm(props) {
     const typeList = Object.keys(typeColor);
     const cashFlowList = ["in", "out"];
 
+    let submitButtonText = "Submit";
+
+    if (props.mode === "Edit") {
+        submitButtonText = "Update";
+    }
+
     const saveTransactionInput = () => {
         const day = transactionDateValue.date()
         const month = transactionDateValue.month()
@@ -246,7 +252,7 @@ function TransactionForm(props) {
                                 type="submit"
                                 buttonStyle="addTransaction-submit-button"
                                 disableStatus={!formIsValid}
-                            >Submit</Button> | <Button
+                            >{ submitButtonText }</Button> | <Button
                                 type="button"
                                 buttonStyle="addTransaction-clear-button"
                                 clickHandler={clearFormHandler}
