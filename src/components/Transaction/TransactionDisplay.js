@@ -48,39 +48,39 @@ function TransactionDisplay(props) {
                 setAmount(Math.round(convertedAmount));
                 setCurrencySymbol(convertedCurrency);
             });
-}
-
-if (props.sameCurrency === "Yes" && props.details.currency !== currencyCtx.currencyCode) {
-    convertCurrency(props.details.currency, currencyCtx.currencyCode, props.details.amount);
-} else if (props.sameCurrency === "No") {
-    if (amount !== props.details.amount) {
-        setAmount(props.details.amount);
-        setCurrencySymbol(initCurrencySymbol);
     }
-}
 
-return (
-    <Link
-        to={"transactionDetail/" + props.docRef}
-        state={props.details}
-        className={styles.linkStyle}
-    >
-        <button
-            className={`${styles["button-list"]} 
-                ${styles["grid-container"]}`}
-            style={{ borderLeft: `6px solid ${typeColor[props.details.type]}` }}
+    if (props.sameCurrency === "Yes" && props.details.currency !== currencyCtx.currencyCode) {
+        convertCurrency(props.details.currency, currencyCtx.currencyCode, props.details.amount);
+    } else if (props.sameCurrency === "No") {
+        if (amount !== props.details.amount) {
+            setAmount(props.details.amount);
+            setCurrencySymbol(initCurrencySymbol);
+        }
+    }
+
+    return (
+        <Link
+            to={"transactionDetail/" + props.docRef}
+            state={props.details}
+            className={styles.linkStyle}
         >
-            <p>{typeIcons[props.details.type]}</p>
-            <div>
-                <h2>{props.details.entity}</h2>
-                <p className={styles["time-format"]}>{day} {month} {year}</p>
-            </div>
-            <p className={styles['amount-format']}>
-                {currencySymbol} {amount}
-            </p>
-        </button>
-    </Link>
-);
+            <button
+                className={`${styles["button-list"]} 
+                ${styles["grid-container"]}`}
+                style={{ borderLeft: `6px solid ${typeColor[props.details.type]}` }}
+            >
+                <p>{typeIcons[props.details.type]}</p>
+                <div>
+                    <h2>{props.details.entity}</h2>
+                    <p className={styles["time-format"]}>{day} {month} {year}</p>
+                </div>
+                <p className={styles['amount-format']}>
+                    {currencySymbol} {amount}
+                </p>
+            </button>
+        </Link>
+    );
 }
 
 export default TransactionDisplay;
